@@ -27,6 +27,10 @@ Look in your Xcode log to get path for each created image.
 
 And that's all!
 
+## Screenshot
+<img width="300" alt="Screenshot1" src="https://user-images.githubusercontent.com/1695222/151670215-16277a94-d68e-4f5a-99ee-cbb7b4782eb4.png">
+
+
 ## Licence
 Be free to use `IconsMaker` for your icons!
 
