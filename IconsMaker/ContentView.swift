@@ -61,7 +61,7 @@ struct ContentView: View {
                 })
                 
                 if generated {
-                    Text("Image(s) generated in directory:\n\(exportDirectory)\n\nRead log in Xcode for details.")
+                    Text("Image(s) generated in directory:\n\(exportDirectory.path)\n\nRead log in Xcode for details.")
                         .font(.caption)
                         .textSelection(.enabled)
                         .padding()
@@ -104,6 +104,10 @@ struct ContentView: View {
                 }
                 else {
                     generated = true
+                    
+                    print("**************\n✅")
+                    print("cd \(exportDirectory.path)")
+                    print("open \(exportDirectory.path)")
                 }
             }
         }
