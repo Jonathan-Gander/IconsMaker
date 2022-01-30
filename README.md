@@ -17,18 +17,18 @@ In file `Tools.swift`, it is just extensions and struct I need. Nothing to do he
 ### Icon drawing
 What is interesting for you is `IconDemo`. It is where you will create your own icon. You can modify everything here or create your own View but please note:
 
-- `size` binding is used by `ContentView` to modify your icon size and generate an image from. You have to use it to size your icon.
-- You also need to use this `size` value for all shapes you want to draw. Otherwise, if you set constant values it will not change in different scales and your icon will be weird.
+- `size` binding is used by `ContentView` to modify your icon size and generate a large image from. You have to use it to size your icon.
+- You also need to use this `size` value for all shapes you want to draw. Otherwise, if you set constant values it will not change in larger scale and your icon will be weird.
 
 ### Images generating
-When your icon is perfect, launch the app in iOS Simulator and tap on `Generate image(s)` button. It will generate all images from your `sizes` property.
+When your icon is perfect, launch the app in iOS Simulator and tap on `Generate image(s)` button. It will generate all images for your `sizes` property.
 
 Look in your Xcode log to get path to your brand new images.
 
-And that's all!
-
 ### How does it work?
 App creates a large View for your Icon View and generate an `UIImage` from it. It is the 'base image'. Then it generates images in all sizes by simply resize base image.
+
+And that's all!
 
 ## Screenshot
 <img width="300" alt="Screenshot1" src="https://user-images.githubusercontent.com/1695222/151670215-16277a94-d68e-4f5a-99ee-cbb7b4782eb4.png">
