@@ -1,8 +1,8 @@
 # IconsMaker
 
-Are you like me? You can develop great apps but you're not able to use design tools to create nice icons! SwiftUI is so great to create shapes. So why not create your icon with SwiftUI code and have an app to generate all PNG images directly in all different sizes? That's what `IconsMaker` does!
+Are you like me? You can develop great apps but you're not able to use design tools to create nice icons! SwiftUI is so great to draw shapes. So why not create your icon with SwiftUI code and have an app to generate all PNG images directly in all different sizes? That's what `IconsMaker` does!
 
-I build it because I needed. And I'm sure it will be usefull for many of you guys!
+I built it because I needed. And I'm sure it will be usefull for many of you guys!
 
 ## Usage
 
@@ -17,8 +17,8 @@ In file `Tools.swift`, it is just extensions and struct I need. Nothing to do he
 ### Icon drawing
 What is interesting for you is `IconDemo`. It is where you will create your own icon. You can modify everything here or create your own View but please note:
 
-- `size` Binding is used by `ContentView` to modify your icon size and generate an image from. You have to use it to size your icon.
-- You also need to use this `size` value for all shapes you want to draw. Otherwise, if you set constant values it will not change in different scale and your icon will be weird.
+- `size` binding is used by `ContentView` to modify your icon size and generate an image from. You have to use it to size your icon.
+- You also need to use this `size` value for all shapes you want to draw. Otherwise, if you set constant values it will not change in different scales and your icon will be weird.
 
 ### Images generating
 When your icon is perfect, launch the app in iOS Simulator and tap on `Generate image(s)` blue button. It will generate all images from your `sizes` property.
