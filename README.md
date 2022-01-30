@@ -31,7 +31,8 @@ App creates a large View for your Icon View and generate an `UIImage` from it. I
 And that's all!
 
 ## Screenshot
-<img width="300" alt="Screenshot1" src="https://user-images.githubusercontent.com/1695222/151670215-16277a94-d68e-4f5a-99ee-cbb7b4782eb4.png">
+<img width="1353" alt="Screenshot" src="https://user-images.githubusercontent.com/1695222/151713908-6615ed1f-12f4-401b-bb62-bcf5bdf8ef64.png">
+
 
 
 ## Licence
