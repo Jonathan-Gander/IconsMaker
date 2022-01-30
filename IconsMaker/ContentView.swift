@@ -55,7 +55,7 @@ struct ContentView: View {
                 Button(action: {
                     generated = false
                     
-                    // Search for biggest requested size
+                    // Search for largest requested size
                     let maxSize = max(sizes.map( { $0.size }).max()!, 2048)
                     
                     Task {
@@ -85,7 +85,7 @@ struct ContentView: View {
         currentSize = await maxSize / UIScreen.main.scale
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            // Create image from (bigest) view
+            // Create image from (largest) view
             let baseImage = icon.snapshot()
             
             for imageSize in sizes {
@@ -93,11 +93,13 @@ struct ContentView: View {
                 guard let resizedImage = baseImage.resize(imageSize.size, imageSize.size) else {
                     fatalError("Could not generate resized image for size \(imageSize.size).")
                 }
-                        
+                
+                // Convert in PNG
                 guard let data = resizedImage.pngData() else {
                     fatalError("Could not convert resized image for size \(imageSize.size) in PNG.")
                 }
                 
+                // Save PNG
                 let path = exportDirectory.appendingPathComponent("\(imageSize.filename).png")
                 do {
                     try data.write(to: path)
