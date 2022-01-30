@@ -39,18 +39,27 @@ struct ContentView: View {
     
     
     // MARK: -
-    @State private var currentSize: CGFloat = 240
+    @State private var currentSize: CGFloat
     @State private var generated = false
     
+    private let initialSize: CGFloat = 240
     private let exportDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    
+    init() {
+        _currentSize = State(initialValue: initialSize)
+    }
     
     var body: some View {
         ScrollView {
             VStack {
                 Button(action: {
                     generated = false
+                    
+                    // Search for biggest requested size
+                    let maxSize = max(sizes.map( { $0.size }).max()!, 2048)
+                    
                     Task {
-                        await generateImage(withSizes: sizes, currentIndex: 0)
+                        await generateImages(maxSize: maxSize)
                     }
                 }, label: {
                     Text("Generate image(s)")
@@ -71,45 +80,41 @@ struct ContentView: View {
             }
         }
     }
-
-    // Recursive functions to generate an image
-    func generateImage(withSizes sizes: [ImageSize], currentIndex: Int) async {
-        guard currentIndex < sizes.count else { return }
-        
-        let imageSize = sizes[currentIndex]
-        
-        // Set size of Icon to real size (taking into account current screen scale)
-        currentSize = await imageSize.size / UIScreen.main.scale
+    
+    func generateImages(maxSize: CGFloat) async {
+        currentSize = await maxSize / UIScreen.main.scale
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            let image = icon.snapshot()
+            // Create image from (bigest) view
+            let baseImage = icon.snapshot()
             
-            if let data = image.pngData() {
+            for imageSize in sizes {
+                // Resize image to current size
+                guard let resizedImage = baseImage.resize(imageSize.size, imageSize.size) else {
+                    fatalError("Could not generate resized image for size \(imageSize.size).")
+                }
+                        
+                guard let data = resizedImage.pngData() else {
+                    fatalError("Could not convert resized image for size \(imageSize.size) in PNG.")
+                }
+                
                 let path = exportDirectory.appendingPathComponent("\(imageSize.filename).png")
                 do {
                     try data.write(to: path)
                 }
                 catch {
-                    print("❌ Could not generate image \(imageSize.filename)")
-                    return
+                    fatalError("Could not generate image \(imageSize.filename)")
                 }
-                
-                print("\(imageSize.filename) saved at path \(path)")
-                
-                // Call next icon to generate
-                if currentIndex + 1 < sizes.count {
-                    Task {
-                        await generateImage(withSizes: sizes, currentIndex: currentIndex + 1)
-                    }
-                }
-                else {
-                    generated = true
-                    
-                    print("**************\n✅")
-                    print("cd \(exportDirectory.path)")
-                    print("open \(exportDirectory.path)")
-                }
+                print("🌄 '\(imageSize.filename)' generated")
             }
+            
+            currentSize = initialSize
+            generated = true
+            
+            print("**************\n✅")
+            print("Files are here: \(exportDirectory.path)")
+            print("cd \(exportDirectory.path)")
+            print("open \(exportDirectory.path)")
         }
     }
 }

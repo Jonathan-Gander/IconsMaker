@@ -22,6 +22,7 @@ struct ImageSize {
     }
 }
 
+// Ref: https://www.hackingwithswift.com/quick-start/swiftui/how-to-convert-a-swiftui-view-to-an-image
 extension View {
     func snapshot() -> UIImage {
         let controller = UIHostingController(rootView: self, ignoreSafeArea: true)
@@ -98,5 +99,21 @@ extension Color {
             blue:  Double(b) / 255,
             opacity: Double(a) / 255
         )
+    }
+}
+
+// Ref: https://stackoverflow.com/questions/31314412/how-to-resize-image-in-swift
+extension UIImage {
+    func resize(_ width: CGFloat, _ height:CGFloat) -> UIImage? {
+        let widthRatio  = width / size.width
+        let heightRatio = height / size.height
+        let ratio = widthRatio > heightRatio ? heightRatio : widthRatio
+        let newSize = CGSize(width: size.width * ratio, height: size.height * ratio)
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        self.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }
