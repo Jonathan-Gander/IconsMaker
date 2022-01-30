@@ -15,7 +15,7 @@ All other code in `ContentView` is for images generating. You don't need to chan
 In file `Tools.swift`, it is just extensions and struct I need. Nothing to do here.
 
 ### Icon drawing
-What is interesting for you is `IconDemo`. It is where you will create your own icon. You can modify everything here but please note:
+What is interesting for you is `IconDemo`. It is where you will create your own icon. You can modify everything here or create your own View but please note:
 
 - `size` Binding is used by `ContentView` to modify your icon size and generate an image from. You have to use it to size your icon.
 - You also need to use this `size` value for all shapes you want to draw. Otherwise, if you set constant values it will not change in different scale and your icon will be weird.

@@ -28,6 +28,7 @@ struct IconDemo: View {
         }
         .frame(width: size, height: size)
         .clipped()
+        .drawingGroup()
     }
 }
 
