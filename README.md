@@ -26,7 +26,7 @@ When your icon is perfect, launch the app in iOS Simulator and tap on `Generate 
 Look in your Xcode log to get path to your brand new images.
 
 ### How does it work?
-App creates a large View for your Icon View and generate an `UIImage` from it. It is the 'base image'. Then it generates images in all sizes by simply resize base image.
+App creates a large View for your `icon` View and generate an `UIImage` from it. It is the 'base image'. Then it generates images in all sizes by simply resize base image.
 
 And that's all!
 
