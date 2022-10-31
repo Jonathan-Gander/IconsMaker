@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+struct Tools {
+    static func yInLineFrom(pt1: CGPoint, pt2: CGPoint, x: CGFloat) -> CGFloat {
+        let m = (pt1.y - pt2.y) / (pt1.x - pt2.x)
+        let b = pt1.y - (m * pt1.x)
+        return m * x + b // y = mx + b
+    }
+
+    static func xInLine(pt1: CGPoint, pt2: CGPoint, y: CGFloat) -> CGFloat {
+        let m = (pt1.y - pt2.y) / (pt1.x - pt2.x)
+        let b = pt1.y - (m * pt1.x)
+        return (y - b) / m // x = (y - b) / m
+    }
+}
+
+// MARK: -
 struct ImageSize {
     let size: CGFloat
     let filename: String
